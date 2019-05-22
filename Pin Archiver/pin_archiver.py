@@ -32,6 +32,7 @@ async def on_message(message):
         msg = 'This is now target channel'
         await message.channel.send(msg)
 
+"""
     if message.content.startswith('!PINS'):
         msg = 'Grabbing pins'
         await message.channel.send(msg)
@@ -61,15 +62,15 @@ async def on_message(message):
         msg = 'Jobs done'
         await message.channel.send(msg)
 
-
+"""
     if message.content.startswith('!exit'):
         await message.channel.send("Fine I'll leave.")
         await client.logout()
-
+"""
     if message.content.startswith('!I killed them. Not just the men.'):
         await message.channel.purge()
         await message.channel.send("But the women and children too.")
-
+"""
 
 @client.event
 async def on_ready():
