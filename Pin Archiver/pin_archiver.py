@@ -1,5 +1,4 @@
 import discord
-# import bitly_api
 from pyshorteners import Shortener
 from datetime import datetime, timedelta
 
@@ -36,6 +35,9 @@ async def on_message(message):
     if message.content.startswith('!PINS'):
         msg = 'Grabbing pins'
         await message.channel.send(msg)
+        await TARGET.send("-"*15)
+        await TARGET.send(message.channel.name)
+        await TARGET.send("-"*15)
         PINS = await message.channel.pins()
         async with TARGET.typing():
             for pin in PINS[::-1]:
