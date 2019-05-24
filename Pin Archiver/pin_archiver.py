@@ -1,12 +1,12 @@
 import discord
-from pyshorteners import Shortener
+#from pyshorteners import Shortener
 from datetime import datetime, timedelta
 
 with open("token.txt", "r") as file:
     TOKEN = file.read()
 
-with open('bitly key.txt', 'r') as file:
-    AUTHKEY = file.read()
+#with open('bitly key.txt', 'r') as file:
+#    AUTHKEY = file.read()
 
 
 
@@ -15,11 +15,22 @@ global TARGET
 global CHANNELIN
 
 
+
 @client.event
 async def on_message(message):
     # we do not want the bot to reply to itself
     if message.author == client.user:
         return
+
+    if message.content.startswith('!MsgVal '):
+        kim = client.get_user() # Removed ID
+        msg = message.content.replace("!MsgVal ", '')
+        chan = kim.dm_channel
+        if chan is None:
+            await kim.create_dm()
+            chan = kim.dm_channel
+        await chan.send(msg)
+
 
     if message.content.startswith('!hello'):
         msg = 'Hello {0.author.mention}'.format(message)
@@ -31,6 +42,9 @@ async def on_message(message):
         msg = 'This is now target channel'
         await message.channel.send(msg)
 
+    if message.content.startswith('!exit'):
+        await message.channel.send("Fine I'll leave.")
+        await client.logout()
 """
     if message.content.startswith('!PINS'):
         msg = 'Grabbing pins'
@@ -64,10 +78,7 @@ async def on_message(message):
         msg = 'Jobs done'
         await message.channel.send(msg)
 
-"""
-    if message.content.startswith('!exit'):
-        await message.channel.send("Fine I'll leave.")
-        await client.logout()
+    """
 """
     if message.content.startswith('!I killed them. Not just the men.'):
         await message.channel.purge()
